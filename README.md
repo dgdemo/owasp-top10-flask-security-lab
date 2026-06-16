@@ -1,53 +1,59 @@
-# OWASP Top 10 Web Demos
+# OWASP Top 10 Flask Security Lab
 
-A collection of small, self-contained web application vulnerability demos focused on the **OWASP Top 10**, with integrated security checks in CI.
+A hands-on OWASP Top 10 learning lab built with Python and Flask.
 
-Each vulnerability lives in its own folder and includes:
+This repository focuses on secure coding, detection limits, CI validation, and understanding where human AppSec review is still required.
 
-- A vulnerable implementation
-- A fixed (secure) version
-- A walkthrough-style README explaining the issue and remediation
-
-## Security CI Pipeline
-
-This repository includes a GitHub Actions security workflow:
-
-Pipeline includes:
-- SAST (Semgrep)
-- SCA (pip-audit)
-- Secrets scanning (Gitleaks)
-- DAST (OWASP ZAP baseline scan)
-
-Pipeline flow:
-- Code is pushed or a PR is opened
-- Security scans run automatically, including static and dynamic analysis
-- The pipeline fails if issues are detected in configured blocking checks
-- Developers review findings and fix vulnerabilities before merge
-- DAST uploads an HTML report artifact for review
-
-Current behavior:
-- The workflow fails on the intentional SQL injection demo
-- The dependency scan passes when no known vulnerable packages are present
-- The ZAP baseline scan generates a report artifact showing runtime findings
-
-## Note
-The OWASP Top 10 is primarily an awareness document and just a starting point for web application security:
-https://owasp.org/Top10/A00_2021_How_to_use_the_OWASP_Top_10_as_a_standard/
+Each category contains intentionally vulnerable examples, secure implementations, walkthroughs, and notes on how the issue can be identified using automated tooling and manual review techniques.
 
 ## Goals
 
-- Help developers understand the cause of common vulnerabilities
-- Provide simple, runnable examples for hands-on learning
-- Demonstrate how vulnerabilities can be detected automatically in a CI pipeline using GitHub Actions
-- Keep each demo lightweight and easy to explore
+* Build practical familiarity with the OWASP Top 10.
+* Demonstrate vulnerable and secure coding patterns side-by-side.
+* Explore where SAST, DAST, SCA, secrets scanning, and other tooling provide value.
+* Highlight categories that rely heavily on threat modeling and manual testing.
+* Provide lightweight examples suitable for learning, experimentation, and AppSec discussions.
 
-## Upcoming Demos
+## Detection Coverage
 
-- Template Injection
-- Insecure Direct Object Reference
-- Open Redirects
-- And more…
+The OWASP Top 10 includes categories that vary significantly in how effectively they can be identified through automated tooling. This matrix highlights where SAST, DAST, SCA, and human AppSec review are most valuable.
 
----
+| Category | Examples | SAST | DAST | SCA | Manual Review |
+|-----------|-----------|:----:|:----:|:---:|:--------------:|
+| A01 Broken Access Control | Planned | ❌ | ⚠️ | ❌ | ✅ |
+| A03 Injection | SQLi, XSS | ✅ | ✅ | ❌ | ✅ |
+| A05 Security Misconfiguration | Planned | ⚠️ | ✅ | ❌ | ✅ |
+| A06 Vulnerable Components | Planned | ❌ | ❌ | ✅ | ⚠️ |
+| A07 Authentication Failures | CSRF | ⚠️ | ⚠️ | ❌ | ✅ |
 
-Each demo is intentionally small and ideal for reading, modifying, and experimenting with vulnerable and secure patterns side by side.
+**Legend:**
+- ✅ Effective detection approach
+- ⚠️ Partial coverage or situational effectiveness
+- ❌ Generally ineffective for this category
+
+## Security CI Pipeline
+
+GitHub Actions security checks include:
+
+* SAST (Semgrep)
+* SCA (pip-audit)
+* Secrets scanning (Gitleaks)
+* DAST (OWASP ZAP Baseline Scan)
+
+Pipeline flow:
+
+1. Code is pushed or a pull request is opened.
+2. Security scans execute automatically.
+3. Blocking checks fail the pipeline when configured findings are detected.
+4. Findings are reviewed and remediated before merge.
+5. DAST artifacts are uploaded for later analysis.
+
+## Detection Philosophy
+
+The OWASP Top 10 is not simply a list of vulnerabilities that scanners can find.
+
+Some categories are highly automatable, while others depend heavily on architecture reviews, threat modeling, and human expertise. This repository aims to demonstrate both the strengths and limitations of security tooling.
+
+## Future Categories
+
+Additional examples may be added over time as the project evolves.

@@ -1,14 +1,19 @@
-.venv
+.venv/
 venv/
 __pycache__/
+.pytest_cache/
+*.py[cod]
+
 .env
 .env.*
+
 .DS_Store
 .vscode/
-*.log
-zap.yaml
 
-# ZAP reports
+*.log
+*.db
+
+# ZAP configuration/artifacts
 zap-report.html
 zap-report.json
 zap-report.xml
